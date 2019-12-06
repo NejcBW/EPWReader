@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPWDemo.App", "EPWDemo.App\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPWDemo.EPWReader", "EPWDemo.EPWReader\EPWDemo.EPWReader.csproj", "{1AF6EE1C-6395-4C61-BEDA-81C964E7F189}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPWDemo.Server", "EPWDemo.Server\EPWDemo.Server.csproj", "{7628C1E6-DCB2-4227-A2BD-EE612CBA40EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,5 +46,17 @@ Global
 		{1AF6EE1C-6395-4C61-BEDA-81C964E7F189}.Release|x64.Build.0 = Release|Any CPU
 		{1AF6EE1C-6395-4C61-BEDA-81C964E7F189}.Release|x86.ActiveCfg = Release|Any CPU
 		{1AF6EE1C-6395-4C61-BEDA-81C964E7F189}.Release|x86.Build.0 = Release|Any CPU
+		{7628C1E6-DCB2-4227-A2BD-EE612CBA40EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7628C1E6-DCB2-4227-A2BD-EE612CBA40EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7628C1E6-DCB2-4227-A2BD-EE612CBA40EA}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7628C1E6-DCB2-4227-A2BD-EE612CBA40EA}.Debug|x64.Build.0 = Debug|Any CPU
+		{7628C1E6-DCB2-4227-A2BD-EE612CBA40EA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7628C1E6-DCB2-4227-A2BD-EE612CBA40EA}.Debug|x86.Build.0 = Debug|Any CPU
+		{7628C1E6-DCB2-4227-A2BD-EE612CBA40EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7628C1E6-DCB2-4227-A2BD-EE612CBA40EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7628C1E6-DCB2-4227-A2BD-EE612CBA40EA}.Release|x64.ActiveCfg = Release|Any CPU
+		{7628C1E6-DCB2-4227-A2BD-EE612CBA40EA}.Release|x64.Build.0 = Release|Any CPU
+		{7628C1E6-DCB2-4227-A2BD-EE612CBA40EA}.Release|x86.ActiveCfg = Release|Any CPU
+		{7628C1E6-DCB2-4227-A2BD-EE612CBA40EA}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -18,7 +18,10 @@ namespace EPWDemo.EPWReader
             var dataFrame = new EPWDataFrame
             {
                 Location = new EPWLocation(),
-                DryBulb = new double[8760]
+                DryBulb = new double[8760],
+                DewPoint = new double[8760],
+                RelHum = new double[8760],
+                Pressure = new double[8760]
             };
 
             var sw = new Stopwatch();
@@ -51,6 +54,9 @@ namespace EPWDemo.EPWReader
             }
 
             double[] dryBulb = new double[8760];
+            double[] dewPoint = new double[8760];
+            double[] relHum = new double[8760];
+            double[] pressure = new double[8760];
 
             int headerLength = 8;
 
@@ -59,10 +65,17 @@ namespace EPWDemo.EPWReader
             {
                 var j = i - headerLength;
                 string[] fields = lines[i].Split(',');
+                
                 dryBulb[j] = double.Parse(fields[6]);
+                dewPoint[j] = double.Parse(fields[7]);
+                relHum[j] = double.Parse(fields[8]);
+                pressure[j] = double.Parse(fields[9]);
             }
 
             dataFrame.DryBulb = dryBulb;
+            dataFrame.DewPoint = dewPoint;
+            dataFrame.RelHum = relHum;
+            dataFrame.Pressure = pressure;
 
             System.Console.WriteLine($"EPW file reading: {sw.Elapsed}");
 

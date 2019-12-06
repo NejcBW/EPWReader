@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using EPWDemo.Server.Data;
+using EPWDemo.EPWReader;
 
 namespace EPWDemo.Server
 {
@@ -29,6 +30,7 @@ namespace EPWDemo.Server
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
+            services.AddSingleton<EPWDataFrameBuilder>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

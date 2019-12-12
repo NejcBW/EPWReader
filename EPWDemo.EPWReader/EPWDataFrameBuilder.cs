@@ -18,6 +18,7 @@ namespace EPWDemo.EPWReader
             var dataFrame = new EPWDataFrame
             {
                 Location = new EPWLocation(),
+                Date = new DateTime[8760],
                 DryBulb = new double[8760],
                 DewPoint = new double[8760],
                 RelHum = new double[8760],
@@ -52,7 +53,8 @@ namespace EPWDemo.EPWReader
                 dataFrame.Location.TimeZone = double.Parse(fields[8]);
                 dataFrame.Location.Elevation = double.Parse(fields[9]);
             }
-
+            
+            DateTime[] Date = new DateTime[8760];
             double[] dryBulb = new double[8760];
             double[] dewPoint = new double[8760];
             double[] relHum = new double[8760];
@@ -60,18 +62,24 @@ namespace EPWDemo.EPWReader
 
             int headerLength = 8;
 
+            DateTime startDate = new DateTime(2002,1,1,00,00,00);
+
             // Parsing DATA PERIODS
             for (int i = headerLength; i < headerLength + 8760; i++)
             {
+                DateTime currentHour = startDate.AddHours(i - headerLength);
+
                 var j = i - headerLength;
                 string[] fields = lines[i].Split(',');
                 
+                Date[j] = currentHour;
                 dryBulb[j] = double.Parse(fields[6]);
                 dewPoint[j] = double.Parse(fields[7]);
                 relHum[j] = double.Parse(fields[8]);
                 pressure[j] = double.Parse(fields[9]);
             }
 
+            dataFrame.Date = Date;
             dataFrame.DryBulb = dryBulb;
             dataFrame.DewPoint = dewPoint;
             dataFrame.RelHum = relHum;

@@ -2,7 +2,7 @@
 """
 Created on Sun Dec  8 09:34:13 2019
 
-@author: user
+@author: Pedro
 """
 
 import pathlib, time

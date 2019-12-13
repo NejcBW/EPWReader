@@ -20,10 +20,13 @@ namespace EPWDemo.App
             System.Console.WriteLine($"Longitude: {epw.Location.Longitude}");
             System.Console.WriteLine($"Time zone: {epw.Location.TimeZone}");
             System.Console.WriteLine($"Elevation: {epw.Location.Elevation}");
-
+            
+            DateTime startDate = new DateTime(2002,1,1,00,00,00);
+            
             for (int i = 0; i < epw.DryBulb.Length; i++)
             {
-                System.Console.WriteLine($"{i+1}: {epw.DryBulb[i]}");
+                DateTime currentHour = startDate.AddHours(i);
+                System.Console.WriteLine($"{currentHour}: {epw.DryBulb[i]}");
             }
 
             System.Console.WriteLine();

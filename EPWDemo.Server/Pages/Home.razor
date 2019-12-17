@@ -1,4 +1,4 @@
-﻿@page "/average"
+﻿@page "/"
 
 @inject EPWDataFrameBuilder FrameBuilder
 @using EPWDemo.EPWReader
@@ -19,7 +19,7 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Month</th>
+                <th>Hour</th>
                 <th>Dry Bulb (C)</th>
                 <th>Dew point (C)</th>
                 <th>Relative hum. (%)</th>
@@ -27,11 +27,11 @@ else
             </tr>
         </thead>
         <tbody>
-            @for (int i = 0; i < 12; i++)
+            @for (int i = 0; i < 8760; i++)
             {
                 <tr>
-                    <td>@i</td>
-                    <td>@monthly_average.DryBulb[i]</td>
+                    <td>@epw.Date[i]</td>
+                    <td>@epw.DryBulb[i]</td>
                     <td>@epw.DewPoint[i]</td>
                     <td>@epw.RelHum[i]</td>
                     <td>@epw.Pressure[i]</td>
@@ -44,10 +44,9 @@ else
 
 @code {
     EPWDataFrame epw;
-    EPWDataFrame monthly_average;
 
     protected override void OnInitialized(){
         epw = FrameBuilder.Build(@"./Files/WAW.epw");
-        monthly_average = FrameBuilder.MonthlyAverage(epw);
+
     }
 }

@@ -1,0 +1,45 @@
+﻿@page "/selector"
+
+@inject EPWDB DataBase
+@using EPWDemo.EPWReader
+
+<h1>Selector</h1>
+
+<p>This page demonstrates fetching data from an epw weather file.</p>
+
+@if (countryList == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <label for="Country" class="control-label">Country</label>
+        </div>
+        <div class="col-md-4">
+            <label asp-for="Cities" class="control-label">Cities</label>
+        </div>
+    </div>
+    <div class="row" style="padding-top:10px">
+        <div class="col-md-4">
+            <select class="form-control">
+                <option value="">-- Select Country --</option>
+                @foreach (var country in countryList)
+                {
+                    <option value="@country">@country</option>
+
+                }
+            </select>
+        </div>
+    </div>
+}
+
+@code {
+    List<string> countryList;
+
+    protected override void OnInitialized()
+    {
+        countryList = DataBase.getCountryList();
+    }
+}

@@ -31,6 +31,7 @@ namespace EPWDemo.Server
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
             services.AddSingleton<EPWDataFrameBuilder>();
+            services.AddSingleton<EPWDB>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,6 +1,7 @@
 ﻿@page "/selector"
 
 @inject EPWDB DataBase
+@inject EPWDataFrameBuilder FrameBuilder
 @using EPWDemo.EPWReader
 
 <h1>Selector</h1>
@@ -23,7 +24,7 @@ else
     </div>
     <div class="row" style="padding-top:10px">
         <div class="col-md-4">
-            <select class="form-control" @onchange="CityClicked">
+            <select class="form-control" @onchange="SelectedCountry">
                 <option value="">-- Select Country --</option>
                 @foreach (var country in countryList)
                 {
@@ -32,7 +33,7 @@ else
             </select>
         </div>
         <div class="col-md-4">
-            <select class="form-control">
+            <select class="form-control" @onchange="SelectedCity">
                 <option value="">-- Select City --</option>
                 @foreach (var city in cityList)
                 {
@@ -41,19 +42,91 @@ else
             </select>
         </div>
     </div>
+    <div class="row" style="padding-top:10px">
+        <button class="btn btn-primary" @onclick="LoadEpw">Click me</button>
+    </div>
+
+    <div class="row" style="padding-top:10px">
+    </div>
+
+    <p>City: @epw.Location.City</p>
+    <p>Country: @epw.Location.Country</p>
+    <p>Source: @epw.Location.Source</p>
+    <p>File: @filename</p>
+
+    <div class="row" style="padding-top:10px">
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Month</th>
+                <th>Dry Bulb (C)</th>
+                <th>Dew point (C)</th>
+                <th>Relative hum. (%)</th>
+                <th>Pressure (Pa)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (epw != null)
+            {
+                @for (int i = 0; i < 12; i++)
+                {
+                    <tr>
+                        <td>@(i + 1)</td>
+                        <td>@epwMonthly.DryBulb[i]</td>
+                        <td>@epwMonthly.DewPoint[i]</td>
+                        <td>@epwMonthly.RelHum[i]</td>
+                        <td>@epwMonthly.Pressure[i]</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
 }
 
 @code {
     List<string> countryList;
     List<string> cityList = new List<string>();
 
+    string city;
+    string filename;
+
+    EPWDataFrame epw;
+    EPWDataFrame epwMonthly;
+
     protected override void OnInitialized()
     {
         countryList = DataBase.GetCountryList();
+        epw = FrameBuilder.Build(@"./Files/WAW.epw");
+        epwMonthly = epw.MonthlyAverage();
     }
 
-    void CityClicked(Microsoft.AspNetCore.Components.ChangeEventArgs cityEvent)
+    void SelectedCountry(Microsoft.AspNetCore.Components.ChangeEventArgs countryEvent)
     {
-        cityList = DataBase.GetCityList(cityEvent.Value.ToString());
+        cityList = DataBase.GetCityList(countryEvent.Value.ToString());
+    }
+
+    void SelectedCity(Microsoft.AspNetCore.Components.ChangeEventArgs cityEvent)
+    {
+        city = cityEvent.Value.ToString();
+    }
+
+    void LoadEpw()
+    {
+        filename = DataBase.GetFileName(city);
+        string path = @"./Files/" + filename;
+        Console.WriteLine("loading file " + filename);
+
+        if (!System.IO.File.Exists(path))
+        {
+            Console.WriteLine("File not found:\n" + path);
+            epw = null;
+            return;
+        }
+
+        epw = FrameBuilder.Build(path);
+        epwMonthly = epw.MonthlyAverage();
     }
 }

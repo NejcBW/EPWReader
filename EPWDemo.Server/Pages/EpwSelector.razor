@@ -18,10 +18,19 @@ else
             <label for="Country" class="control-label">Country</label>
         </div>
         <div class="col-md-4">
-            <label asp-for="Cities" class="control-label">Cities</label>
+            <label for="Cities" class="control-label">Cities</label>
         </div>
     </div>
     <div class="row" style="padding-top:10px">
+        <div class="col-md-4">
+            <select class="form-control">
+                <option value="">-- Select Country --</option>
+                @foreach (var country in countryList)
+                {
+                    <option value="@country">@country</option>
+                }
+            </select>
+        </div>
         <div class="col-md-4">
             <select class="form-control">
                 <option value="">-- Select Country --</option>

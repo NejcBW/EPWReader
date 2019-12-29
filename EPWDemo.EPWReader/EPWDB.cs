@@ -9,10 +9,10 @@ namespace EPWDemo.EPWReader
     {
         public List<Location> Locations = new List<Location>
             {
-            new Location() {City = "Brussels", Country="Belgium"},
-            new Location("Oostende","Belgium"),
-            new Location("HCMC","Vietnam"),
-            new Location("Hanoi","Vietnam"),
+            new Location() {City = "Brussels", Country="Belgium", Filename = "BEL_BRUSSELS_IWEC.epw"},
+            new Location("Oostende","Belgium","BEL_OOSTENDE(AP)_064070_IW2.epw"),
+            new Location("HCMC","Vietnam","-"),
+            new Location("Hanoi","Vietnam","-"),
             };
         public List<string> GetCityList(string country)
         {
@@ -38,16 +38,19 @@ namespace EPWDemo.EPWReader
     {
         public string City;
         public string Country;
+        public string Filename;
 
         public Location()
         {
             City = "";
             Country = "";
+            Filename = "";
         }
-        public Location(string city, string country)
+        public Location(string city, string country, string filename)
         {
             City= city;
             Country = country;
+            Filename = filename;
         }
     }
 }

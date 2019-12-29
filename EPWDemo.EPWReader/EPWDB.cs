@@ -14,18 +14,18 @@ namespace EPWDemo.EPWReader
             new Location("HCMC","Vietnam"),
             new Location("Hanoi","Vietnam"),
             };
-        public void getCityList()
+        public List<string> GetCityList(string country)
         {
             List<string> cityList = new List<string>();
-            Locations.ForEach(x => cityList.Add(x.City));
+            cityList = (from CityName in Locations where CityName.Country == country select CityName.City).ToList();
 
             foreach (var city in cityList)
             {
                 Console.WriteLine(city);
             }
-            return;
+            return cityList;
         }
-        public List<string> getCountryList()
+        public List<string> GetCountryList()
         {
             List<string> countryList = new List<string>();
             Locations.ForEach(x => countryList.Add(x.Country));

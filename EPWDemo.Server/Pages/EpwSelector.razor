@@ -23,7 +23,7 @@ else
     </div>
     <div class="row" style="padding-top:10px">
         <div class="col-md-4">
-            <select class="form-control">
+            <select class="form-control" @onchange="CityClicked">
                 <option value="">-- Select Country --</option>
                 @foreach (var country in countryList)
                 {
@@ -33,10 +33,10 @@ else
         </div>
         <div class="col-md-4">
             <select class="form-control">
-                <option value="">-- Select Country --</option>
-                @foreach (var country in countryList)
+                <option value="">-- Select City --</option>
+                @foreach (var city in cityList)
                 {
-                    <option value="@country">@country</option>
+                    <option value="@city">@city</option>
                 }
             </select>
         </div>
@@ -45,9 +45,15 @@ else
 
 @code {
     List<string> countryList;
+    List<string> cityList = new List<string>();
 
     protected override void OnInitialized()
     {
-        countryList = DataBase.getCountryList();
+        countryList = DataBase.GetCountryList();
+    }
+
+    void CityClicked(Microsoft.AspNetCore.Components.ChangeEventArgs cityEvent)
+    {
+        cityList = DataBase.GetCityList(cityEvent.Value.ToString());
     }
 }

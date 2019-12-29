@@ -11,8 +11,8 @@ namespace EPWDemo.EPWReader
             {
             new Location() {City = "Brussels", Country="Belgium", Filename = "BEL_BRUSSELS_IWEC.epw"},
             new Location("Oostende","Belgium","BEL_OOSTENDE(AP)_064070_IW2.epw"),
-            new Location("HCMC","Vietnam","-"),
-            new Location("Hanoi","Vietnam","-"),
+            new Location("HCMC","Vietnam","HCMC.epw"),
+            new Location("Hanoi","Vietnam","HANOI.epw"),
             };
         public List<string> GetCityList(string country)
         {

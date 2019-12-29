@@ -32,6 +32,15 @@ namespace EPWDemo.EPWReader
 
             return countryList.Distinct().ToList();
         }
+        public string GetFileName(string city)
+        {
+            List<string> filenames = (from City in Locations where City.City == city select City.Filename).ToList();
+
+            if (filenames.Count() == 1)
+                return filenames.First();
+
+            return null;
+        }
     }
 
     public class Location
